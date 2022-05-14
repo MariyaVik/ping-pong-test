@@ -47,6 +47,8 @@ img_rocket = 'images/racket.png'
 # константы
 rocket_width = 50
 rocket_height = 150
+ball_speed_x = 3
+ball_speed_y = 3
  
 # флаги, отвечающие за состояние игры
 game = True
@@ -69,6 +71,15 @@ while game:
         window.fill(back)
         racket1.update_l()
         racket2.update_r()
+        ball.rect.x += ball_speed_x
+        ball.rect.y += ball_speed_y
+    
+        if sprite.collide_rect(racket1, ball) or sprite.collide_rect(racket2, ball):
+            ball_speed_x *= -1
+
+        if ball.rect.y > win_height-50 or ball.rect.y < 0:
+            ball_speed_y *= -1
+
 
     
         racket1.reset()
